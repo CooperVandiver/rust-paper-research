@@ -1,11 +1,8 @@
 #[allow(unused_variables)]
-use std::time::{SystemTime};
 
 pub fn find_det(a: &mut Vec<Vec<f64>>) -> Option<f64> {
-	let start = SystemTime::now();
     // matrix not square, determinant is invalid
     if a.len() != a[0].len() {
-		println!("Determinant Time: {} ns", start.elapsed().unwrap().as_micros());
         return None;
     }
 
@@ -31,7 +28,6 @@ pub fn find_det(a: &mut Vec<Vec<f64>>) -> Option<f64> {
 
         // checking for singularity
         if max_a < tol {
-			println!("Determinant Time: {} ns", start.elapsed().unwrap().as_micros());
             return Some(0.0); // matrix is singular, determinant is 0
         }
 
@@ -54,7 +50,6 @@ pub fn find_det(a: &mut Vec<Vec<f64>>) -> Option<f64> {
         }
     }    
 
-	println!("Determinant Time: {} ns", start.elapsed().unwrap().as_micros());
     // calculating and returning determinant
     Some((0..n).fold(1.0, |acc, i| {
         acc * a[i][i]

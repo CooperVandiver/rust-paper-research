@@ -1,13 +1,10 @@
 #include <assert.h>
-#include <thread>
 #include <vector>
 
 #include "err.h"
 #include "determinant.h"
 
 double findDet(std::vector<std::vector<double>> &A) {
-	auto start = std::chrono::high_resolution_clock::now();
-
     if (A.size() != A[0].size())
 		errx(1, "Matrix is not square.");
 
@@ -59,10 +56,6 @@ double findDet(std::vector<std::vector<double>> &A) {
     for (int i = 0; i < N; i++) {
         det *= A[i][i];
     }
-
-	auto stop = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-	printf("C++ Determinant: %lld microsecs", duration.count());
 
     return det;
 }

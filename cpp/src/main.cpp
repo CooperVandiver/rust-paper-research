@@ -44,18 +44,16 @@ int main()
 		}
 		B.push_back(temp);
 	}
+	auto C = mat_mul_thread(A, B);
 
-	//auto C = mat_mul_thread(A, B);
 
-	//printMat(C);
-
-	/*std::vector<std::vector<double>> mat {
+	std::vector<std::vector<double>> mat {
 		{1,2,3},
 		{2,5,0},
 		{0,0,1}
-	};*/
+	};
 
-	printf("\nDeterminant: %f\n", findDet(A));
+	printf("\nDeterminant: %f\n", findDet(mat));
 
 	return 0;
 }

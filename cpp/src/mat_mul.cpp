@@ -54,7 +54,6 @@ std::vector<std::vector<int>> mat_mul_thread(const std::vector<std::vector<int>>
 		handles.push_back(std::thread([&](int ni, std::vector<int> *v) {
 			++threadCount;
 			int inter_val;
-			auto start = std::chrono::high_resolution_clock::now();
 			for (size_t j = 0; j < B[0].size(); ++j) {
 				inter_val = 0;
 
@@ -63,9 +62,6 @@ std::vector<std::vector<int>> mat_mul_thread(const std::vector<std::vector<int>>
 				}
 				v->push_back(inter_val);
 			}
-			auto stop = std::chrono::high_resolution_clock::now();
-			auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-			printf("Thread %lld: %lld\n", i, duration.count());
 			--threadCount;
 		}, i, &res.back()));
 	}

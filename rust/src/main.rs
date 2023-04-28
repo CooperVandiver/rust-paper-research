@@ -1,7 +1,7 @@
 #![allow(dead_code, unused_imports)]
 
 use rand::Rng;
-use std::time::{SystemTime};
+use std::sync::Arc;
 
 const MAX_THREAD: i32 = 8;
 const M: i32 = 1000; 
@@ -20,9 +20,7 @@ fn main() {
 
     let x: Vec<Vec<i32>> = (0..M).map(|_| (0..N).map(|_| rng.gen_range(1..=2)).collect()).collect();
     let y: Vec<Vec<i32>> = (0..N).map(|_| (0..P).map(|_| rng.gen_range(1..=2)).collect()).collect();
-    //let z = mat_mul_thread(Arc::new(x), Arc::new(y));
-	//let start = SystemTime::now();
-	//println!("{}x{} * {}x{}: {} ms", M, N, N, P, start.elapsed().unwrap().as_millis());*/
+    let z = mat_mul_thread(Arc::new(x), Arc::new(y));
 
 
     let mut x: Vec<Vec<f64>> = (0..M).map(|_| (0..N).map(|_| rng.gen_range(1..=2) as f64).collect()).collect();

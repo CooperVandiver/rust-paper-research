@@ -1,6 +1,5 @@
 use std::thread::{ self, JoinHandle };
 use std::sync::{ Arc, atomic::{ AtomicI32, Ordering }, };
-use std::time::SystemTime;
 use crate::{ MAX_THREAD };
 
 pub fn mat_mul(x: &Vec<Vec<i32>>, y: &Vec<Vec<i32>>) -> Option<Vec<Vec<i32>>> {
@@ -36,13 +35,11 @@ pub fn mat_mul_thread(x: Arc<Vec<Vec<i32>>>, y: Arc<Vec<Vec<i32>>>) -> Option<Ve
 		let y = Arc::clone(&y);
         let thread_count = Arc::clone(&thread_count);
         handles.push(thread::spawn(move || {
-            let start = SystemTime::now();
             let res = (0..y[0].len()).map(|j| {
                 (0..y.len()).fold(0, |acc, k | {
                     acc + x[i][k] * y[k][j]
                 })
             }).collect::<Vec<i32>>();
-            println!("Thread {}: {} ns", i, start.elapsed().unwrap().as_micros());
             thread_count.fetch_sub(1, Ordering::Relaxed);
             res
         }));

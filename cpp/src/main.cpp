@@ -25,10 +25,10 @@ int main()
 		}
 	};*/
 
-	std::vector<std::vector<double>> A, B;
+	std::vector<std::vector<int>> A, B;
 	A.reserve(M);
 	B.reserve(N);
-	std::vector<double> temp;
+	std::vector<int> temp;
 	for (size_t i = 0; i < M; ++i) {
 		temp.clear();
 		for (size_t j = 0; j < N; ++j) {
